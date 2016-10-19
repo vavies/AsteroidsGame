@@ -1,16 +1,42 @@
-//your variable declarations here
+SpaceShip main = new SpaceShip();
 public void setup() 
 {
-  //your code here
+  size(400,400);
+  main.setX(200);
+  main.setY(200);
+  main.setDirectionX(90);
+  main.setDirectionY(90);
+  main.setPointDirection(20);
+
+
 }
 public void draw() 
 {
-  //your code here
+  background(0);
+  main.show();
+  // main.move();
+  // main.accelerate(5);
+  // main.rotate(5);
+} 
+class SpaceShip extends Floater{
+  SpaceShip(){
+    myColor = 90;
+    
+
+  }
+  public void setX(int x) {myCenterX = x;}
+  public int getX(){return (int)myCenterX;}
+  public void setY(int y){myCenterY = y;}
+  public int getY(){return (int)myCenterY;}
+  public void setDirectionX(double x){myDirectionX = x;}
+  public double getDirectionX(){return myDirectionX;}
+  public void setDirectionY(double y){myDirectionY = y;}
+  public double getDirectionY(){return myDirectionY;}
+  public void setPointDirection(int degrees){myPointDirection = degrees;}
+  public double getPointDirection(){return myPointDirection;}
 }
-class SpaceShip //extends Floater  
-{   
-    //your code here
-}
+
+
 abstract class Floater //Do NOT modify the Floater class! Make changes in the SpaceShip class 
 {   
   protected int corners;  //the number of corners, a triangular floater has 3   
