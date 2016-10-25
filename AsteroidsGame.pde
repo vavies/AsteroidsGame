@@ -1,28 +1,59 @@
 SpaceShip main = new SpaceShip();
+Star[] cool;
 public void setup() 
 {
-  size(400,400);
+  cool = new Star[300];
+  for(int i =0; i<cool.length; i++){
+    cool[i] = new Star();
+  }
+  size(1000,1000);
   main.setX(200);
   main.setY(200);
-  main.setDirectionX(90);
-  main.setDirectionY(90);
-  main.setPointDirection(20);
+  main.setDirectionX(0);
+  main.setDirectionY(0);
+  main.setPointDirection(0);
 
 
 }
 public void draw() 
 {
   background(0);
+  for(int i = 0; i<cool.length; i++){
+    cool[i].show();
+  }
   main.show();
-  // main.move();
-  // main.accelerate(5);
-  // main.rotate(5);
+  main.move();
+  main.accelerate(0);
+  main.rotate(0);
+
 } 
 class SpaceShip extends Floater{
   SpaceShip(){
-    myColor = 90;
-    
+    myColor = color(80,100,190);
+    corners = 9;
+    xCorners = new int[corners];
+    yCorners = new int[corners];
+    xCorners[0] = -40;
+    yCorners[0] = -20;
+    xCorners[1] = -20;
+    yCorners[1] = -10;
+    xCorners[2] = 10;
+    yCorners[2] = -10;
+    xCorners[3] = 30;
+    yCorners[3] = 0;
+    xCorners[4] = 10;
+    yCorners[4] = 10;
+    xCorners[5] = -20;
+    yCorners[5] = 10;
+    xCorners[6] = -40;
+    yCorners[6] = 20;
+    xCorners[7] = -30;
+    yCorners[7] = 0;
+    xCorners[8] = -40;
+    yCorners[8] = -20;  
 
+  }
+  public void show(){
   }
   public void setX(int x) {myCenterX = x;}
   public int getX(){return (int)myCenterX;}
@@ -34,6 +65,37 @@ class SpaceShip extends Floater{
   public double getDirectionY(){return myDirectionY;}
   public void setPointDirection(int degrees){myPointDirection = degrees;}
   public double getPointDirection(){return myPointDirection;}
+}
+
+class Star{
+  private int myX,myY;
+  public Star(){
+    myX = (int)(Math.random()*1000);
+    myY = (int)(Math.random()*1000);
+  }
+  public void show(){
+    stroke(190,190,190);
+    strokeWeight(2);
+    line(myX-5,myY,myX+5,myY);
+    line(myX,myY-5,myX,myY+5);
+    strokeWeight(1);
+    line(myX-3,myY-3,myX+3,myY+3);
+    line(myX-3,myY+3,myX+3,myY-3);
+  }
+}
+public void keyPressed(){
+  if(key == 'w'){
+    main.accelerate(1.1);
+  }
+  if(key == 's'){
+    main.accelerate(-1.1);
+  }
+  if(key == 'd'){
+    main.rotate(2);
+  }
+  if(key == 'a'){
+    main.rotate(-2);
+  }
 }
 
 
