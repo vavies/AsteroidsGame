@@ -6,7 +6,7 @@ public void setup()
   for(int i =0; i<cool.length; i++){
     cool[i] = new Star();
   }
-  size(1000,1000);
+  size(1000,750);
   main.setX(200);
   main.setY(200);
   main.setDirectionX(0);
@@ -53,8 +53,6 @@ class SpaceShip extends Floater{
     yCorners[8] = -20;  
 
   }
-  public void show(){
-  }
   public void setX(int x) {myCenterX = x;}
   public int getX(){return (int)myCenterX;}
   public void setY(int y){myCenterY = y;}
@@ -65,6 +63,53 @@ class SpaceShip extends Floater{
   public double getDirectionY(){return myDirectionY;}
   public void setPointDirection(int degrees){myPointDirection = degrees;}
   public double getPointDirection(){return myPointDirection;}
+
+  public void show(){
+    fill(255);  
+    strokeWeight(5); 
+    stroke(myColor);    
+    //convert degrees to radians for sin and cos         
+    double dRadians = myPointDirection*(Math.PI/180);                 
+    int xRotatedTranslated, yRotatedTranslated;    
+    beginShape();         
+    for(int nI = 0; nI < corners; nI++)    
+    {     
+      //rotate and translate the coordinates of the floater using current direction 
+      xRotatedTranslated = (int)((xCorners[nI]* Math.cos(dRadians)) - (yCorners[nI] * Math.sin(dRadians))+myCenterX);     
+      yRotatedTranslated = (int)((xCorners[nI]* Math.sin(dRadians)) + (yCorners[nI] * Math.cos(dRadians))+myCenterY);      
+      vertex(xRotatedTranslated,yRotatedTranslated);    
+    }   
+    endShape(CLOSE);
+    fill(0);
+    noStroke();
+    ellipse((int)myCenterX,(int)myCenterY,10,10);  
+  }
+public void move(){
+    myCenterX += myDirectionX;    
+    myCenterY += myDirectionY;     
+   
+    if(myCenterX >width)
+    {     
+      myDirectionX = 0;
+      myDirectionY = 0;    
+    }    
+    else if (myCenterX<0)
+    {     
+      myDirectionX = 0;
+      myDirectionY = 0;   
+    }    
+    if(myCenterY >height)
+    {    
+      myDirectionX = 0;
+      myDirectionY = 0;    
+    }   
+    else if (myCenterY < 0)
+    {     
+      myDirectionX = 0;
+      myDirectionY = 0;     
+    }   
+  } 
+
 }
 
 class Star{
@@ -91,11 +136,12 @@ public void keyPressed(){
     main.accelerate(-1.1);
   }
   if(key == 'd'){
-    main.rotate(2);
+    main.rotate(3);
   }
   if(key == 'a'){
-    main.rotate(-2);
+    main.rotate(-3);
   }
+
 }
 
 
