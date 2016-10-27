@@ -1,5 +1,6 @@
 SpaceShip main = new SpaceShip();
 Star[] cool;
+boolean rocket = false;
 public void setup() 
 {
   cool = new Star[300];
@@ -28,9 +29,13 @@ public void draw()
 
 } 
 class SpaceShip extends Floater{
+  private int corner = 3;
+  private int x2Corners[];
+  private int y2Corners[];
   SpaceShip(){
     myColor = color(80,100,190);
     corners = 9;
+    //spaceship
     xCorners = new int[corners];
     yCorners = new int[corners];
     xCorners[0] = -40;
@@ -51,6 +56,15 @@ class SpaceShip extends Floater{
     yCorners[7] = 0;
     xCorners[8] = -40;
     yCorners[8] = -20;  
+    //rocket
+    x2Corners = new int[corner];
+    y2Corners = new int[corner];
+    x2Corners[0] = -20;
+    y2Corners[0] = -10;
+    x2Corners[1] = -70;
+    y2Corners[1] = 0;
+    x2Corners[2] = -20;
+    y2Corners[2] = 10;
 
   }
   public void setX(int x) {myCenterX = x;}
@@ -65,12 +79,26 @@ class SpaceShip extends Floater{
   public double getPointDirection(){return myPointDirection;}
 
   public void show(){
+    double dRadians = myPointDirection*(Math.PI/180);                 
+    int xRotatedTranslated, yRotatedTranslated; 
+
+    //rocket
+    if(rocket == true){
+      fill(250,100,0);
+      noStroke();
+      beginShape();
+      for(int i =0; i<corner; i++){
+      xRotatedTranslated = (int)((x2Corners[i]* Math.cos(dRadians)) - (y2Corners[i] * Math.sin(dRadians))+myCenterX);
+      yRotatedTranslated = (int)((x2Corners[i]* Math.sin(dRadians)) + (y2Corners[i] * Math.cos(dRadians))+myCenterY);
+      vertex(xRotatedTranslated,yRotatedTranslated);
+      }
+      endShape();
+     }
+     //spaceship
     fill(255);  
     strokeWeight(5); 
     stroke(myColor);    
-    //convert degrees to radians for sin and cos         
-    double dRadians = myPointDirection*(Math.PI/180);                 
-    int xRotatedTranslated, yRotatedTranslated;    
+    //convert degrees to radians for sin and cos            
     beginShape();         
     for(int nI = 0; nI < corners; nI++)    
     {     
@@ -79,10 +107,12 @@ class SpaceShip extends Floater{
       yRotatedTranslated = (int)((xCorners[nI]* Math.sin(dRadians)) + (yCorners[nI] * Math.cos(dRadians))+myCenterY);      
       vertex(xRotatedTranslated,yRotatedTranslated);    
     }   
-    endShape(CLOSE);
+    endShape(CLOSE); 
+
     fill(0);
     noStroke();
-    ellipse((int)myCenterX,(int)myCenterY,10,10);  
+    ellipse((int)myCenterX,(int)myCenterY,10,10);
+  
   }
 public void move(){
     myCenterX += myDirectionX;    
@@ -130,19 +160,35 @@ class Star{
 }
 public void keyPressed(){
   if(key == 'w'){
-    main.accelerate(1.1);
+    main.accelerate(0.1);
+    rocket = true;
   }
   if(key == 's'){
-    main.accelerate(-1.1);
+    main.accelerate(-0.1);
+    rocket = true;
   }
   if(key == 'd'){
-    main.rotate(3);
+    main.rotate(10);
   }
   if(key == 'a'){
-    main.rotate(-3);
+    main.rotate(-10);
+  }
+  //hyperspace
+  if(key == 'z'){
+    main.setX((int)(Math.random()*1000));
+    main.setY((int)(Math.random()*750));
   }
 
 }
+public void keyReleased(){
+  if(key == 'w'){
+    rocket = false;
+  }
+  if(key == 's'){
+    rocket = false;
+  }
+}
+
 
 
 abstract class Floater //Do NOT modify the Floater class! Make changes in the SpaceShip class 
