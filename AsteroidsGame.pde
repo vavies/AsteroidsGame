@@ -177,6 +177,8 @@ public void keyPressed(){
   if(key == 'z'){
     main.setX((int)(Math.random()*1000));
     main.setY((int)(Math.random()*750));
+    main.setDirectionX(0);
+    main.setDirectionY(0);
   }
 
 }
