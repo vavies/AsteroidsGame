@@ -1,13 +1,20 @@
 SpaceShip main = new SpaceShip();
 Star[] cool;
+Asteroid[] danger;
 boolean rocket = false;
 public void setup() 
 {
+  size(1000,750);
   cool = new Star[300];
   for(int i =0; i<cool.length; i++){
     cool[i] = new Star();
   }
-  size(1000,750);
+  danger = new Asteroid[50];
+  for(int i = 0; i<danger.length; i++){
+    danger[i] = new Asteroid();
+    danger[i].setX((int)(Math.random()*1000));
+    danger[i].setY((int)(Math.random()*750));
+  }
   main.setX(200);
   main.setY(200);
   main.setDirectionX(0);
@@ -21,6 +28,10 @@ public void draw()
   background(0);
   for(int i = 0; i<cool.length; i++){
     cool[i].show();
+  }
+  for(int i = 0; i<danger.length; i++){
+    danger[i].show();
+    danger[i].move();
   }
   main.show();
   main.move();
@@ -191,6 +202,48 @@ public void keyReleased(){
   }
 }
 
+public class Asteroid extends Floater{
+  private int speed;
+  Asteroid(){
+    speed = (int)(Math.random()*3-2);
+  }
+  void move(){
+    myCenterX = myCenterX + speed;
+    myCenterY = myCenterY + speed;
+    if(myCenterX >width)
+    {     
+      myCenterX = 0;    
+    }    
+    else if (myCenterX<0)
+    {     
+      myCenterX = width;    
+    }    
+    if(myCenterY >height)
+    {    
+      myCenterY = 0;    
+    }   
+    else if (myCenterY < 0)
+    {     
+      myCenterY = height;  
+    }
+  }
+  void show(){
+    fill(50,60,90);
+    ellipse((int)myCenterX,(int)myCenterY,10,10);
+  }
+//useless code
+  public void setX(int x) {myCenterX = x;}
+  public int getX(){return (int)myCenterX;}
+  public void setY(int y){myCenterY = y;}
+  public int getY(){return (int)myCenterY;}
+  public void setDirectionX(double x){myDirectionX = x;}
+  public double getDirectionX(){return myDirectionX;}
+  public void setDirectionY(double y){myDirectionY = y;}
+  public double getDirectionY(){return myDirectionY;}
+  public void setPointDirection(int degrees){myPointDirection = degrees;}
+  public double getPointDirection(){return myPointDirection;}
+//end of useless code
+}
 
 
 abstract class Floater //Do NOT modify the Floater class! Make changes in the SpaceShip class 
