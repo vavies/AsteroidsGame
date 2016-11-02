@@ -9,11 +9,9 @@ public void setup()
   for(int i =0; i<cool.length; i++){
     cool[i] = new Star();
   }
-  danger = new Asteroid[50];
+  danger = new Asteroid[10];
   for(int i = 0; i<danger.length; i++){
     danger[i] = new Asteroid();
-    danger[i].setX((int)(Math.random()*1000));
-    danger[i].setY((int)(Math.random()*750));
   }
   main.setX(200);
   main.setY(200);
@@ -30,7 +28,7 @@ public void draw()
     cool[i].show();
   }
   for(int i = 0; i<danger.length; i++){
-    danger[i].show();
+    danger[i].show();    
     danger[i].move();
   }
   main.show();
@@ -157,7 +155,7 @@ class Star{
   private int myX,myY;
   public Star(){
     myX = (int)(Math.random()*1000);
-    myY = (int)(Math.random()*1000);
+    myY = (int)(Math.random()*750);
   }
   public void show(){
     stroke(190,190,190);
@@ -203,13 +201,17 @@ public void keyReleased(){
 }
 
 public class Asteroid extends Floater{
-  private int speed;
+  private double speed;
   Asteroid(){
-    speed = (int)(Math.random()*3-2);
+    speed = (Math.random()*3-1);
+    myCenterX = (int)(Math.random()*1000);
+    myCenterY = (int)(Math.random()*750);
+    myDirectionX = speed;
+    myDirectionY = speed;
   }
   void move(){
-    myCenterX = myCenterX + speed;
-    myCenterY = myCenterY + speed;
+    myCenterX = myCenterX + myDirectionX;
+    myCenterY = myCenterY + myDirectionY;
     if(myCenterX >width)
     {     
       myCenterX = 0;    
@@ -229,7 +231,7 @@ public class Asteroid extends Floater{
   }
   void show(){
     fill(50,60,90);
-    ellipse((int)myCenterX,(int)myCenterY,10,10);
+    ellipse((int)myCenterX,(int)myCenterY,30,30);
   }
 //useless code
   public void setX(int x) {myCenterX = x;}
