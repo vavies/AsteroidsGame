@@ -30,6 +30,7 @@ public void draw()
   for(int i = 0; i<danger.length; i++){
     danger[i].show();    
     danger[i].move();
+    danger[i].rotate(0);
   }
   main.show();
   main.move();
@@ -41,7 +42,7 @@ class SpaceShip extends Floater{
   private int corner = 3;
   private int x2Corners[];
   private int y2Corners[];
-  SpaceShip(){
+  public SpaceShip(){
     myColor = color(80,100,190);
     corners = 9;
     //spaceship
@@ -76,6 +77,7 @@ class SpaceShip extends Floater{
     y2Corners[2] = 10;
 
   }
+
   public void setX(int x) {myCenterX = x;}
   public int getX(){return (int)myCenterX;}
   public void setY(int y){myCenterY = y;}
@@ -208,8 +210,19 @@ public class Asteroid extends Floater{
     myCenterY = (int)(Math.random()*750);
     myDirectionX = speed;
     myDirectionY = speed;
+
+    //drawing
+    corners = 3;
+    xCorners = new int[corners];
+    yCorners = new int[corners];
+    xCorners[0] = 10;
+    yCorners[0] = 0;
+    xCorners[1] = -15;
+    yCorners[1] = -10;
+    xCorners[2] = -15;
+    yCorners[2] = 10;
   }
-  void move(){
+  public void move(){
     myCenterX = myCenterX + myDirectionX;
     myCenterY = myCenterY + myDirectionY;
     if(myCenterX >width)
@@ -229,10 +242,25 @@ public class Asteroid extends Floater{
       myCenterY = height;  
     }
   }
-  void show(){
-    fill(50,60,90);
-    ellipse((int)myCenterX,(int)myCenterY,30,30);
+  public void show(){
+    fill(250,250,0);
+    double dRadians = myPointDirection*(Math.PI/180);                 
+    int xRotatedTranslated, yRotatedTranslated;    
+    beginShape();         
+    for(int nI = 0; nI < corners; nI++)    
+    {     
+      //rotate and translate the coordinates of the floater using current direction 
+      xRotatedTranslated = (int)((xCorners[nI]* Math.cos(dRadians)) - (yCorners[nI] * Math.sin(dRadians))+myCenterX);     
+      yRotatedTranslated = (int)((xCorners[nI]* Math.sin(dRadians)) + (yCorners[nI] * Math.cos(dRadians))+myCenterY);      
+      vertex(xRotatedTranslated,yRotatedTranslated);    
+    }   
+    endShape(CLOSE); 
   }
+  public void rotate(int nDegreesOfRotation){
+    myPointDirection+=nDegreesOfRotation;    
+    nDegreesOfRotation = nDegreesOfRotation + (int)(Math.random()*100+50);
+  }
+
 //useless code
   public void setX(int x) {myCenterX = x;}
   public int getX(){return (int)myCenterX;}
