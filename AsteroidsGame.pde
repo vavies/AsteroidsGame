@@ -30,7 +30,7 @@ public void draw()
   for(int i = 0; i<danger.length; i++){
     danger[i].show();    
     danger[i].move();
-    danger[i].rotate(0);
+    danger[i].rotate(Math.random()*3-1);
   }
   main.show();
   main.move();
@@ -212,15 +212,24 @@ public class Asteroid extends Floater{
     myDirectionY = speed;
 
     //drawing
-    corners = 3;
+    corners = 7;
     xCorners = new int[corners];
     yCorners = new int[corners];
-    xCorners[0] = 10;
+    xCorners[0] = -20;
     yCorners[0] = 0;
-    xCorners[1] = -15;
-    yCorners[1] = -10;
-    xCorners[2] = -15;
-    yCorners[2] = 10;
+    xCorners[1] = -10;
+    yCorners[1] = -20;
+    xCorners[2] = 5;
+    yCorners[2] = -20;
+    xCorners[3] = 20;
+    yCorners[3] = 0;
+    xCorners[4] = 10;
+    yCorners[4] = 20;
+    xCorners[5] = -10;
+    yCorners[5] = 15;
+    xCorners[6] = -20;
+    yCorners[6] = 0;
+
   }
   public void move(){
     myCenterX = myCenterX + myDirectionX;
@@ -243,7 +252,9 @@ public class Asteroid extends Floater{
     }
   }
   public void show(){
-    fill(250,250,0);
+    stroke(50,50,50);
+    fill(25,25,25);
+    strokeWeight(3);
     double dRadians = myPointDirection*(Math.PI/180);                 
     int xRotatedTranslated, yRotatedTranslated;    
     beginShape();         
@@ -256,10 +267,16 @@ public class Asteroid extends Floater{
     }   
     endShape(CLOSE); 
   }
-  public void rotate(int nDegreesOfRotation){
-    myPointDirection+=nDegreesOfRotation;    
-    nDegreesOfRotation = nDegreesOfRotation + (int)(Math.random()*100+50);
-  }
+    public void rotate (double nDegreesOfRotation)   
+  {     
+    //rotates the floater by a given number of degrees    
+    myPointDirection+=nDegreesOfRotation;   
+  } 
+  // public void rotate(int nDegreesOfRotation){
+   
+  //   nDegreesOfRotation = (int)(nDegreesOfRotation + (Math.random()*3-1));
+  //   myPointDirection+=nDegreesOfRotation; 
+  // }
 
 //useless code
   public void setX(int x) {myCenterX = x;}
