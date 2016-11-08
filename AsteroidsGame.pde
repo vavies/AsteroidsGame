@@ -12,6 +12,11 @@ public void setup()
   danger = new Asteroid[10];
   for(int i = 0; i<danger.length; i++){
     danger[i] = new Asteroid();
+    danger[i].setX((int)(Math.random()*1000));
+    danger[i].setY((int)(Math.random()*750));
+    danger[i].setDirectionX((Math.random()*3-1));
+    danger[i].setDirectionY(Math.random()*3-1);
+    danger[i].setRotateSpeed(Math.random()*3-1);
   }
   main.setX(200);
   main.setY(200);
@@ -30,7 +35,8 @@ public void draw()
   for(int i = 0; i<danger.length; i++){
     danger[i].show();    
     danger[i].move();
-    danger[i].rotate(Math.random()*3-1);
+    danger[i].rotate(danger[i].getRotateSpeed());
+    System.out.println(i+ " " + danger[i].getRotateSpeed());
   }
   main.show();
   main.move();
@@ -126,8 +132,8 @@ class SpaceShip extends Floater{
   
   }
 public void move(){
-    myCenterX += myDirectionX;    
-    myCenterY += myDirectionY;     
+    myCenterX = myCenterX + myDirectionX;    
+    myCenterY = myCenterY + myDirectionY;     
    
     if(myCenterX >width)
     {     
@@ -205,11 +211,9 @@ public void keyReleased(){
 public class Asteroid extends Floater{
   private double speed;
   Asteroid(){
-    speed = (Math.random()*3-1);
+    speed = 0;
     myCenterX = (int)(Math.random()*1000);
     myCenterY = (int)(Math.random()*750);
-    myDirectionX = speed;
-    myDirectionY = speed;
 
     //drawing
     corners = 7;
@@ -229,28 +233,8 @@ public class Asteroid extends Floater{
     yCorners[5] = 15;
     xCorners[6] = -20;
     yCorners[6] = 0;
+  }
 
-  }
-  public void move(){
-    myCenterX = myCenterX + myDirectionX;
-    myCenterY = myCenterY + myDirectionY;
-    if(myCenterX >width)
-    {     
-      myCenterX = 0;    
-    }    
-    else if (myCenterX<0)
-    {     
-      myCenterX = width;    
-    }    
-    if(myCenterY >height)
-    {    
-      myCenterY = 0;    
-    }   
-    else if (myCenterY < 0)
-    {     
-      myCenterY = height;  
-    }
-  }
   public void show(){
     stroke(50,50,50);
     fill(25,25,25);
@@ -267,18 +251,15 @@ public class Asteroid extends Floater{
     }   
     endShape(CLOSE); 
   }
-    public void rotate (double nDegreesOfRotation)   
-  {     
-    //rotates the floater by a given number of degrees    
-    myPointDirection+=nDegreesOfRotation;   
-  } 
-  // public void rotate(int nDegreesOfRotation){
-   
-  //   nDegreesOfRotation = (int)(nDegreesOfRotation + (Math.random()*3-1));
-  //   myPointDirection+=nDegreesOfRotation; 
-  // }
 
-//useless code
+  public void rotate(double rotateSpeed){
+    speed = rotateSpeed;
+    myPointDirection+=speed;
+  }
+  public void setRotateSpeed(double rotateSpeed){speed = rotateSpeed;}
+  public double getRotateSpeed(){return speed;}
+
+
   public void setX(int x) {myCenterX = x;}
   public int getX(){return (int)myCenterX;}
   public void setY(int y){myCenterY = y;}
@@ -289,7 +270,7 @@ public class Asteroid extends Floater{
   public double getDirectionY(){return myDirectionY;}
   public void setPointDirection(int degrees){myPointDirection = degrees;}
   public double getPointDirection(){return myPointDirection;}
-//end of useless code
+
 }
 
 
