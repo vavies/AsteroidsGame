@@ -2,6 +2,7 @@ SpaceShip main = new SpaceShip();
 Star[] cool;
 Asteroid[] danger;
 boolean rocket = false;
+
 public void setup() 
 {
   size(1000,750);
@@ -81,8 +82,7 @@ class SpaceShip extends Floater{
     y2Corners[1] = 0;
     x2Corners[2] = -20;
     y2Corners[2] = 10;
-
-  }
+ }
 
   public void setX(int x) {myCenterX = x;}
   public int getX(){return (int)myCenterX;}
@@ -114,12 +114,10 @@ class SpaceShip extends Floater{
      //spaceship
     fill(255);  
     strokeWeight(5); 
-    stroke(myColor);    
-    //convert degrees to radians for sin and cos            
+    stroke(myColor);            
     beginShape();         
     for(int nI = 0; nI < corners; nI++)    
     {     
-      //rotate and translate the coordinates of the floater using current direction 
       xRotatedTranslated = (int)((xCorners[nI]* Math.cos(dRadians)) - (yCorners[nI] * Math.sin(dRadians))+myCenterX);     
       yRotatedTranslated = (int)((xCorners[nI]* Math.sin(dRadians)) + (yCorners[nI] * Math.cos(dRadians))+myCenterY);      
       vertex(xRotatedTranslated,yRotatedTranslated);    
