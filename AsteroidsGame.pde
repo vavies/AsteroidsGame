@@ -48,7 +48,6 @@ public void draw()
     danger.get(i).show();    
     danger.get(i).move();
     danger.get(i).rotate(danger.get(i).getRotateSpeed());
-    System.out.println(i+ " " + danger.get(i).getRotateSpeed());
   }
   main.show();
   main.move();
