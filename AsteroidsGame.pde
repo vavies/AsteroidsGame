@@ -1,6 +1,7 @@
 SpaceShip main = new SpaceShip();
 Star[] cool;
-Asteroid[] danger;
+// Asteroid[] danger;
+ArrayList<Asteroid> danger = new ArrayList<Asteroid>();
 boolean rocket = false;
 
 public void setup() 
@@ -10,14 +11,24 @@ public void setup()
   for(int i =0; i<cool.length; i++){
     cool[i] = new Star();
   }
-  danger = new Asteroid[10];
-  for(int i = 0; i<danger.length; i++){
-    danger[i] = new Asteroid();
-    danger[i].setX((int)(Math.random()*1000));
-    danger[i].setY((int)(Math.random()*750));
-    danger[i].setDirectionX((Math.random()*3-1));
-    danger[i].setDirectionY(Math.random()*3-1);
-    danger[i].setRotateSpeed(Math.random()*3-1);
+  // danger = new Asteroid[10];
+  for(int i = 0; i<10; i++){
+    danger.add(new Asteroid());
+  }
+  // for(int i = 0; i<danger.length; i++){
+  //   danger[i] = new Asteroid();
+  //   danger[i].setX((int)(Math.random()*1000));
+  //   danger[i].setY((int)(Math.random()*750));
+  //   danger[i].setDirectionX((Math.random()*3-1));
+  //   danger[i].setDirectionY(Math.random()*3-1);
+  //   danger[i].setRotateSpeed(Math.random()*3-1);
+  // }
+  for(int i = 0; i<danger.size(); i++){
+    danger.get(i).setX((int)(Math.random()*1000));
+    danger.get(i).setY((int)(Math.random()*750));
+    danger.get(i).setDirectionX((Math.random()*3-1));
+    danger.get(i).setDirectionY(Math.random()*3-1);
+    danger.get(i).setRotateSpeed(Math.random()*3-1);
   }
   main.setX(200);
   main.setY(200);
@@ -33,11 +44,11 @@ public void draw()
   for(int i = 0; i<cool.length; i++){
     cool[i].show();
   }
-  for(int i = 0; i<danger.length; i++){
-    danger[i].show();    
-    danger[i].move();
-    danger[i].rotate(danger[i].getRotateSpeed());
-    System.out.println(i+ " " + danger[i].getRotateSpeed());
+  for(int i = 0; i<danger.size(); i++){
+    danger.get(i).show();    
+    danger.get(i).move();
+    danger.get(i).rotate(danger.get(i).getRotateSpeed());
+    System.out.println(i+ " " + danger.get(i).getRotateSpeed());
   }
   main.show();
   main.move();
