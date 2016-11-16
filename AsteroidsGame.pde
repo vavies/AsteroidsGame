@@ -1,6 +1,6 @@
 SpaceShip main = new SpaceShip();
 Star[] cool;
-// Asteroid[] danger;
+// Asteroid[] distance;
 ArrayList<Asteroid> danger = new ArrayList<Asteroid>();
 boolean rocket = false;
 
@@ -37,9 +37,12 @@ public void setup()
   main.setPointDirection(0);
 
 
+
 }
 public void draw() 
 {
+
+
   background(0);
   for(int i = 0; i<cool.length; i++){
     cool[i].show();
@@ -48,13 +51,17 @@ public void draw()
     danger.get(i).show();    
     danger.get(i).move();
     danger.get(i).rotate(danger.get(i).getRotateSpeed());
+    if(20>dist(main.getX(), main.getY(), danger.get(i).getX(), danger.get(i).getY())){
+      danger.remove(i);
   }
   main.show();
   main.move();
   main.accelerate(0);
   main.rotate(0);
-
 } 
+
+
+}
 class SpaceShip extends Floater{
   private int corner = 3;
   private int x2Corners[];
