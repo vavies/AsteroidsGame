@@ -51,7 +51,7 @@ public void draw()
     danger.get(i).show();    
     danger.get(i).move();
     danger.get(i).rotate(danger.get(i).getRotateSpeed());
-    if(20>dist(main.getX(), main.getY(), danger.get(i).getX(), danger.get(i).getY())){
+    if(50>dist(main.getX(), main.getY(), danger.get(i).getX(), danger.get(i).getY())){
       danger.remove(i);
   }
   main.show();
@@ -192,11 +192,11 @@ class Star{
 }
 public void keyPressed(){
   if(key == 'w'){
-    main.accelerate(0.1);
+    main.accelerate(0.05);
     rocket = true;
   }
   if(key == 's'){
-    main.accelerate(-0.1);
+    main.accelerate(-0.05);
     rocket = true;
   }
   if(key == 'd'){
