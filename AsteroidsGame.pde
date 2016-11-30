@@ -1,8 +1,10 @@
 SpaceShip main = new SpaceShip();
 Star[] cool;
-// Asteroid[] distance;
+
 ArrayList<Asteroid> danger = new ArrayList<Asteroid>();
 boolean rocket = false;
+ArrayList<Bullet> phew = new ArrayList<Bullet>();
+boolean death = false;
 
 public void setup() 
 {
@@ -11,18 +13,11 @@ public void setup()
   for(int i =0; i<cool.length; i++){
     cool[i] = new Star();
   }
-  // danger = new Asteroid[10];
   for(int i = 0; i<10; i++){
     danger.add(new Asteroid());
   }
-  // for(int i = 0; i<danger.length; i++){
-  //   danger[i] = new Asteroid();
-  //   danger[i].setX((int)(Math.random()*1000));
-  //   danger[i].setY((int)(Math.random()*750));
-  //   danger[i].setDirectionX((Math.random()*3-1));
-  //   danger[i].setDirectionY(Math.random()*3-1);
-  //   danger[i].setRotateSpeed(Math.random()*3-1);
-  // }
+
+
   for(int i = 0; i<danger.size(); i++){
     danger.get(i).setX((int)(Math.random()*1000));
     danger.get(i).setY((int)(Math.random()*750));
@@ -37,11 +32,9 @@ public void setup()
   main.setPointDirection(0);
 
 
-
 }
 public void draw() 
 {
-
 
   background(0);
   for(int i = 0; i<cool.length; i++){
@@ -58,6 +51,15 @@ public void draw()
   main.move();
   main.accelerate(0);
   main.rotate(0);
+  if(death == true){
+    phew.add(new Bullet(main));
+  }
+  for(int s =0; s<phew.size(); s++){
+    phew.get(s).show();
+    phew.get(s).move();
+  }
+
+  
 } 
 
 
@@ -212,6 +214,9 @@ public void keyPressed(){
     main.setDirectionX(0);
     main.setDirectionY(0);
   }
+  if(key == ' '){
+    death = true;
+  }
 
 }
 public void keyReleased(){
@@ -220,6 +225,9 @@ public void keyReleased(){
   }
   if(key == 's'){
     rocket = false;
+  }
+  if(key == ' '){
+    death = false;
   }
 }
 
