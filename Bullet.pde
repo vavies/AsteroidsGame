@@ -9,6 +9,7 @@ class Bullet extends Floater{
 	public double getDirectionY(){return myDirectionY;}
 	public void setPointDirection(int degrees){myPointDirection = degrees;}
 	public double getPointDirection(){return myPointDirection;}
+
 	public Bullet(SpaceShip theShip){
 		myCenterX = theShip.getX();
 		myCenterY = theShip.getY();
@@ -21,27 +22,27 @@ class Bullet extends Floater{
 		noFill();
 		stroke(90,250,90);
 		strokeWeight(2);
-		ellipse((int)myCenterX,(int)myCenterY,10,7); 
+		ellipse((int)myCenterX,(int)myCenterY,5,2); 
 	}
-	public void move(){
-		myCenterX += myDirectionX;
-		myCenterY += myDirectionY;
+	// public void move(){
+	// 	myCenterX += myDirectionX;
+	// 	myCenterY += myDirectionY;
 
-    if(myCenterX >width)
-    {     
-      death = false;   
-    }    
-    else if (myCenterX<0)
-    {     
-      death = false; 
-    }    
-    if(myCenterY >height)
-    {    
-      death = false; 
-    }   
-    else if (myCenterY < 0)
-    {     
-      death = false;
-    }   
-	}
+ //    if(myCenterX >width)
+ //    {     
+ //      death = false;   
+ //    }    
+ //    else if (myCenterX<0)
+ //    {     
+ //      death = false; 
+ //    }    
+ //    if(myCenterY >height)
+ //    {    
+ //      death = false; 
+ //    }   
+ //    else if (myCenterY < 0)
+ //    {     
+ //      death = false;
+ //    }   
+	// }
 }
