@@ -3,38 +3,38 @@ class SpaceShip extends Floater{
   private int x2Corners[];
   private int y2Corners[];
   public SpaceShip(){
-    myColor = color(80,100,190);
+    myColor = color(100,100,100);
     corners = 9;
     //spaceship
     xCorners = new int[corners];
     yCorners = new int[corners];
-    xCorners[0] = -40;
-    yCorners[0] = -20;
-    xCorners[1] = -20;
-    yCorners[1] = -10;
-    xCorners[2] = 10;
-    yCorners[2] = -10;
-    xCorners[3] = 30;
+    xCorners[0] = -20;
+    yCorners[0] = -10;
+    xCorners[1] = -10;
+    yCorners[1] = -5;
+    xCorners[2] = 5;
+    yCorners[2] = -5;
+    xCorners[3] = 15;
     yCorners[3] = 0;
-    xCorners[4] = 10;
-    yCorners[4] = 10;
-    xCorners[5] = -20;
-    yCorners[5] = 10;
-    xCorners[6] = -40;
-    yCorners[6] = 20;
-    xCorners[7] = -30;
+    xCorners[4] = 5;
+    yCorners[4] = 5;
+    xCorners[5] = -10;
+    yCorners[5] = 5;
+    xCorners[6] = -20;
+    yCorners[6] = 10;
+    xCorners[7] = -15;
     yCorners[7] = 0;
-    xCorners[8] = -40;
-    yCorners[8] = -20;  
+    xCorners[8] = -20;
+    yCorners[8] = -10;  
     //rocket
     x2Corners = new int[corner];
     y2Corners = new int[corner];
-    x2Corners[0] = -20;
-    y2Corners[0] = -10;
-    x2Corners[1] = -70;
+    x2Corners[0] = -10;
+    y2Corners[0] = -5;
+    x2Corners[1] = -35;
     y2Corners[1] = 0;
-    x2Corners[2] = -20;
-    y2Corners[2] = 10;
+    x2Corners[2] = -10;
+    y2Corners[2] = 5;
     myPointDirection = 0;
     myDirectionX=0;
     myDirectionY=0;
@@ -69,7 +69,7 @@ class SpaceShip extends Floater{
      }
      //spaceship
     fill(255);  
-    strokeWeight(5); 
+    strokeWeight(3); 
     stroke(myColor);            
     beginShape();         
     for(int nI = 0; nI < corners; nI++)    
@@ -80,9 +80,9 @@ class SpaceShip extends Floater{
     }   
     endShape(CLOSE); 
 
-    fill(0);
-    noStroke();
-    ellipse((int)myCenterX,(int)myCenterY,10,10);
+    // fill(0);
+    // noStroke();
+    // ellipse((int)myCenterX,(int)myCenterY,5,5);
   
   }
 public void move(){

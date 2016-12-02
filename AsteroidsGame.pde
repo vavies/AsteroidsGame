@@ -13,7 +13,7 @@ public void setup()
   for(int i =0; i<cool.length; i++){
     cool[i] = new Star();
   }
-  for(int i = 0; i<10; i++){
+  for(int i = 0; i<3; i++){
     danger.add(new Asteroid());
   }
 
@@ -43,14 +43,30 @@ public void draw()
 
   main.show();
   main.move();
-
+  for(int t = 0; t<danger.size(); t++){
+    danger.get(t).show();    
+    danger.get(t).move();
+    danger.get(t).rotate(danger.get(t).getRotateSpeed());
+  }
   for(int i = 0; i<danger.size(); i++){
-    danger.get(i).show();    
-    danger.get(i).move();
-    danger.get(i).rotate(danger.get(i).getRotateSpeed());
-    if(50>dist(main.getX(), main.getY(), danger.get(i).getX(), danger.get(i).getY())){
-      danger.remove(i);
+    //rocket makes astoirds go awayd
+    // if(50>dist(main.getX(), main.getY(), danger.get(i).getX(), danger.get(i).getY())){
+    //   danger.remove(i);
+    // }
+    for(int p = 0; p<phew.size(); p++){
+      //bullets make astoirds go away
+      if(20>dist(phew.get(p).getX(), phew.get(p).getY(), danger.get(i).getX(), danger.get(i).getY())){
+        danger.remove(i);
+        phew.remove(p);
+      }
     }
+  }
+  if(danger.size() ==0){
+    background(0);
+    textSize(40);
+    textAlign(CENTER);
+    fill(40,40,40);
+    text("TEST",500,375);
   }
 }
 

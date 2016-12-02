@@ -24,25 +24,25 @@ class Bullet extends Floater{
 		strokeWeight(2);
 		ellipse((int)myCenterX,(int)myCenterY,5,2); 
 	}
-	// public void move(){
-	// 	myCenterX += myDirectionX;
-	// 	myCenterY += myDirectionY;
+	public void move(){
+		myCenterX += myDirectionX;
+		myCenterY += myDirectionY;
 
- //    if(myCenterX >width)
- //    {     
- //      death = false;   
- //    }    
- //    else if (myCenterX<0)
- //    {     
- //      death = false; 
- //    }    
- //    if(myCenterY >height)
- //    {    
- //      death = false; 
- //    }   
- //    else if (myCenterY < 0)
- //    {     
- //      death = false;
- //    }   
-	// }
+	    if(myCenterX >width)
+	    {     
+	      death = false;   
+	    }    
+	    else if (myCenterX<0)
+	    {     
+	      death = false; 
+	    }    
+	    if(myCenterY >height)
+	    {    
+	      death = false; 
+	    }   
+	    else if (myCenterY < 0)
+	    {     
+	      death = false;
+	    }   
+	}
 }
