@@ -1,5 +1,7 @@
 SpaceShip main = new SpaceShip();
 Star[] cool;
+int scenes = 0;
+int life = 3;
 
 ArrayList<Asteroid> danger = new ArrayList<Asteroid>();
 boolean rocket = false;
@@ -13,10 +15,9 @@ public void setup()
   for(int i =0; i<cool.length; i++){
     cool[i] = new Star();
   }
-  for(int i = 0; i<3; i++){
+  for(int i = 0; i<1; i++){
     danger.add(new Asteroid());
   }
-
 
   for(int i = 0; i<danger.size(); i++){
     danger.get(i).setX((int)(Math.random()*1000));
@@ -27,16 +28,19 @@ public void setup()
   }
   main.setX(200);
   main.setY(200);
+  if(danger.size() ==0){
+    scenes = 1;
+  }
 
 }
 public void draw() 
 {
-
+  if(scenes == 0){
   background(0);
     for(int i = 0; i<cool.length; i++){
     cool[i].show();
   }
-  for(int s =0; s<phew.size(); s++){
+  for(int s =1; s<phew.size(); s++){
     phew.get(s).show();
     phew.get(s).move();
   } 
@@ -49,10 +53,11 @@ public void draw()
     danger.get(t).rotate(danger.get(t).getRotateSpeed());
   }
   for(int i = 0; i<danger.size(); i++){
-    //rocket makes astoirds go awayd
-    // if(50>dist(main.getX(), main.getY(), danger.get(i).getX(), danger.get(i).getY())){
-    //   danger.remove(i);
-    // }
+    // rocket makes astoirds go awayd
+    if(10>dist(main.getX(), main.getY(), danger.get(i).getX(), danger.get(i).getY())){
+      danger.remove(i);
+      life--;
+    }
     for(int p = 0; p<phew.size(); p++){
       //bullets make astoirds go away
       if(20>dist(phew.get(p).getX(), phew.get(p).getY(), danger.get(i).getX(), danger.get(i).getY())){
@@ -61,13 +66,19 @@ public void draw()
       }
     }
   }
-  if(danger.size() ==0){
+  if(scenes ==1){
     background(0);
     textSize(40);
     textAlign(CENTER);
     fill(40,40,40);
-    text("TEST",500,375);
+    text("YOU WIN!",500,300);
+    strokeWeight(5);
+    fill(255);
+    rect(400,330,200,50);
+    fill(90,90,90);
+    text("RESTART WITH ENTER",500,375);
   }
+}
 }
 
 abstract class Floater //Do NOT modify the Floater class! Make changes in the SpaceShip class 
