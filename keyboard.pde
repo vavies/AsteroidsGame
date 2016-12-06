@@ -24,6 +24,9 @@ public void keyPressed(){
     death = true;
     phew.add(new Bullet(main));
   }
+  if(key == 'r' && game == false){
+    game = true;
+  }
 }
 public void keyReleased(){
   if(key == 'w'){
