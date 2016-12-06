@@ -35,6 +35,9 @@ public void draw()
 {
   if(game == true){
     background(0);
+    if(danger.size() ==0){
+      game = false;
+    }
       for(int i = 0; i<cool.length; i++){
       cool[i].show();
     }
@@ -65,19 +68,15 @@ public void draw()
         }
       }
     }
-    if(danger.size() ==0){
-    game = false;
-    }
   }
   if(game == false){
     background(0);
+    fill(255);
+    rect(300,230,400,175);
     textSize(40);
     textAlign(CENTER);
     fill(40,40,40);
     text("YOU WIN!",500,300);
-    strokeWeight(5);
-    fill(255);
-    rect(300,330,400,50);
     fill(90,90,90);
     text("RESTART WITH R",500,375);
   }

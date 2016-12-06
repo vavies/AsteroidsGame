@@ -38,4 +38,7 @@ public void keyReleased(){
   if(key == ' '){
     death = false;
   }
+  if(key == 'r'){
+    game = false;
+  }
 }
