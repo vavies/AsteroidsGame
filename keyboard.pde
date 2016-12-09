@@ -19,6 +19,7 @@ public void keyPressed(){
     main.setY((int)(Math.random()*750));
     main.setDirectionX(0);
     main.setDirectionY(0);
+    main.rotate((int)(Math.random()*360));
   }
   if(key == ' '){
     death = true;
